@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:garage_eka/screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:garage_eka/user_home_screens/selectmodel.dart';
 
 class ManufactureScreen extends StatefulWidget {
   @override
@@ -136,49 +137,6 @@ class _ManufactureScreenState extends State<ManufactureScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(255, 255, 255, 255),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              icon: Icon(FontAwesomeIcons.home, color: Color(0xFF707477)),
-              onPressed: () {
-                 Navigator.pushReplacementNamed(context, '/home');
-              },
-              tooltip: 'Home',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.wrench, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the search button
-              },
-              tooltip: 'Spare Parts',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.plus, color: Color(0xFF707477)),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/manufacture');
-              },
-              tooltip: 'Add New',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.car, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the notifications button
-              },
-              tooltip: 'Service',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.comment, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the settings button
-              },
-              tooltip: 'Chat',
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -205,7 +163,12 @@ Widget build(BuildContext context) {
         'manufacturerName': manufacturerName,
         'DocumentID': documentId,
       };
-      Navigator.pushReplacementNamed(context, '/model', arguments: arguments);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ModelScreen(arguments),
+        ),
+      );
     },
     child: Container(
       decoration: BoxDecoration(

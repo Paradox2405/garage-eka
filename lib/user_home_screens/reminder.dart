@@ -14,6 +14,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterL
 
 
 class ReminderScreen extends StatefulWidget {
+  Map<String, dynamic> arguments;
+  ReminderScreen(this.arguments);
   @override
   _ReminderScreenState createState() => _ReminderScreenState();
 }
@@ -27,6 +29,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
 
 
 Future<void> _showNotification() async {
+  flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+      AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
   const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
     'your_channel_id', // Replace with your channel ID
     'Channel Name', // Replace with your channel name
@@ -120,7 +124,7 @@ Future<void> _showNotification() async {
 
 
 
-      final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final arguments = widget.arguments;
             final documentId = arguments['DocumentID'] as dynamic;
       CollectionReference carpotCollection = FirebaseFirestore.instance.collection('carport');
 
@@ -158,7 +162,7 @@ Future<void> _showNotification() async {
           icon: Icon(Icons.close),
           color: Colors.black,
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/home');
+           Navigator.pop(context);
           },
         ),
         title: Text(
@@ -363,49 +367,6 @@ ElevatedButton(
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(255, 255, 255, 255),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              icon: Icon(FontAwesomeIcons.home, color: Color(0xFF707477)),
-              onPressed: () {
-                 Navigator.pushReplacementNamed(context, '/home');
-              },
-              tooltip: 'Home',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.wrench, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the search button
-              },
-              tooltip: 'Spare Parts',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.plus, color: Color(0xFF707477)),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/manufacture');
-              },
-              tooltip: 'Add New',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.car, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the notifications button
-              },
-              tooltip: 'Service',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.comment, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the settings button
-              },
-              tooltip: 'Chat',
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

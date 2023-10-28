@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/home');
+           Navigator.pop(context);
           },
         ),
         title: Text(
@@ -193,65 +193,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       floatingActionButtonLocation: FloatingActionButtonLocation
           .endFloat, // Adjust the location as needed
-      bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(
-            255, 255, 255, 255), // Set the background color of the bottom bar
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.home,
-                color: Color(0xFF707477),
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-              tooltip: 'Home',
-            ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.wrench,
-                color: Color(0xFF707477),
-              ),
-              onPressed: () {
-                // Define the action for the search button
-              },
-              tooltip: 'Spare Parts',
-            ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.plus,
-                color: Color(0xFF707477),
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/manufacture');
-              },
-              tooltip: 'Add New',
-            ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.car,
-                color: Color(0xFF707477),
-              ),
-              onPressed: () {
-                // Define the action for the notifications button
-              },
-              tooltip: 'Service',
-            ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.comment,
-                color: Color(0xFF707477),
-              ),
-              onPressed: () {
-                // Define the action for the settings button
-              },
-              tooltip: 'Chat',
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

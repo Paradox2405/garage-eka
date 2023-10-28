@@ -3,12 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:garage_eka/screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:garage_eka/user_home_screens/reminder.dart';
 
 class ModelScreen extends StatefulWidget {
+  Map<String, dynamic> arguments;
+  ModelScreen(this.arguments);
 
 
 
-  
   @override
   _ModelScreenState createState() => _ModelScreenState();
 }
@@ -61,7 +63,7 @@ Future<void> getAllManufacturers(String documentId) async {
 
   @override
   Widget build(BuildContext context) {
-          final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          final arguments = widget.arguments;
             final manufacturerName = arguments['manufacturerName'] as String;
             final documentId = arguments['DocumentID'] as dynamic;
             getAllManufacturers(documentId); // Call to fetch data
@@ -72,7 +74,7 @@ Future<void> getAllManufacturers(String documentId) async {
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/manufacture');
+            Navigator.pop(context);
           },
         ),
         title: Text(
@@ -140,49 +142,6 @@ Future<void> getAllManufacturers(String documentId) async {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(255, 255, 255, 255),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              icon: Icon(FontAwesomeIcons.home, color: Color(0xFF707477)),
-              onPressed: () {
-                 Navigator.pushReplacementNamed(context, '/home');
-              },
-              tooltip: 'Home',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.wrench, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the search button
-              },
-              tooltip: 'Spare Parts',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.plus, color: Color(0xFF707477)),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/manufacture');
-              },
-              tooltip: 'Add New',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.car, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the notifications button
-              },
-              tooltip: 'Service',
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.comment, color: Color(0xFF707477)),
-              onPressed: () {
-                // Define the action for the settings button
-              },
-              tooltip: 'Chat',
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -208,7 +167,13 @@ class ImageTextButton extends StatelessWidget {
         Map<String, dynamic> arguments = {
                 'DocumentID': documentId,
             };
-          Navigator.pushReplacementNamed(context, '/reminder', arguments: arguments);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ReminderScreen(arguments),
+          ),
+        );
+
       },
       child: Container(
       decoration: BoxDecoration(

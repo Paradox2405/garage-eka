@@ -57,7 +57,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       await firestore.collection('Users').doc(currentUser.uid).set({
         'UserName': currentUser.displayName,
         'Email': currentUser.email,
-        'isAdmin':_isAdmin,
+        'isAdmin': _isAdmin,
       });
     }
   }
@@ -65,91 +65,148 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-        backgroundColor: Colors.amber, // Set the app theme color
-      ),
-      body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        child: Container(
-          padding: EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.amber, Colors.white],
+      backgroundColor: Color(0xFFF7C910),
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.10,
+          top: MediaQuery.of(context).size.height * 0.18,
+          right: MediaQuery.of(context).size.width * 0.10,
+        ),
+        child: Column(
+          children: [
+            Text(
+              'Registration', // Add your heading text here
+              style: TextStyle(
+                fontSize: 30, // Adjust the font size as needed
+                fontWeight: FontWeight.bold, // You can change the fontWeight
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  filled: true,
-                  fillColor: Colors.white,
+            SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.090), // Add a top margin of 10% of the screen height
+
+            TextField(
+              controller: usernameController,
+              decoration: InputDecoration(
+                labelText: 'Enter Your Username',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Color(0xFFE3BA12)), // Border color when focused
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color:
+                          Color(0xFFE3BA12)), // Border color when not focused
+                ),
+                fillColor: Color(0xFFE3BA12), // Background color
+                filled: true,
+              ),
+            ),
+
+            SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.020), // Add a top margin of 10% of the screen height
+
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: 'Enter Your Email',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Color(0xFFE3BA12)), // Border color when focused
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color:
+                          Color(0xFFE3BA12)), // Border color when not focused
+                ),
+                fillColor: Color(0xFFE3BA12), // Background color
+                filled: true,
+              ),
+            ),
+
+            SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.020), // Add a top margin of 10% of the screen height
+
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: 'Enter Your Password',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Color(0xFFE3BA12)), // Border color when focused
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color:
+                          Color(0xFFE3BA12)), // Border color when not focused
+                ),
+                fillColor: Color(0xFFE3BA12), // Background color
+                filled: true,
+              ),
+            ),
+
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  'Is Admin?',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Checkbox(
+                  value: _isAdmin,
+                  onChanged: (value) {
+                    setState(() {
+                      _isAdmin = value!;
+                    });
+                  },
+                ),
+              ],
+            ),
+
+            SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.050), // Add a top margin of 10% of the screen height
+            ElevatedButton(
+              onPressed: () =>
+                  _register(context), // Use a lambda function to call _signIn
+              child: Text(
+                'Register',
+                style: TextStyle(
+                  fontSize: 18.0, // Adjust the font size to your preference
                 ),
               ),
-              SizedBox(height: 10),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  filled: true,
-                  fillColor: Colors.white,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white, // Background color
+                onPrimary: Colors.black, // Text color
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.10,
+                  top: MediaQuery.of(context).size.height * 0.018,
+                  right: MediaQuery.of(context).size.width * 0.10,
+                  bottom: MediaQuery.of(context).size.height * 0.018,
+                ),
+                elevation: 0.0,
+              ),
+            ),
+
+            SizedBox(height: 10), // Add some space
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              },
+              child: Text(
+                'Back to Login',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0, // Adjust the font size to your preference
                 ),
               ),
-              SizedBox(height: 10),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  Text(
-                    'Is Admin?',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Checkbox(
-                    value: _isAdmin,
-                    onChanged: (value) {
-                      setState(() {
-                        _isAdmin = value!;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => _register(context),
-                child: Text('Register'),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.amber, // Set the button color
-                ),
-              ),
-              SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()),
-                  );
-                },
-                child: Text(
-                  'Back to Login',
-                  style: TextStyle(color: Colors.amber),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

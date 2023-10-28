@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
+import 'package:garage_eka/user_home_screens/edit_carport.dart';
 import 'package:intl/intl.dart';
 
 
 class ViewPortScreen extends StatefulWidget {
+  Map<String, dynamic> arguments;
+  ViewPortScreen(this.arguments);
   @override
   _ViewPortScreenState createState() => _ViewPortScreenState();
 
@@ -54,7 +57,7 @@ Future<bool> _showConfirmationDialog(BuildContext context) async {
 Future<void> deleteCar(String carDocumentID) async {
   try {
     await FirebaseFirestore.instance.collection('carport').doc(carDocumentID).delete();
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pop(context);
   } catch (e) {
     print('Error deleting car: $e');
   }
@@ -99,7 +102,7 @@ Future<void> printCarData(uuserid) async {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final arguments = widget.arguments;
             final Insurance = arguments['Insurance'] as String;
             final license = arguments['license'] as dynamic;
             final service = arguments['service'] as dynamic;
@@ -250,11 +253,12 @@ Row(
       'DID': '${dID}',
     };
 
-    Navigator.pushNamed(
-      context,
-      '/edit_port',
-      arguments: arguments,
-    );
+           Navigator.push(
+             context,
+             MaterialPageRoute(
+               builder: (context) => EditCarportScreen(arguments),
+             ),
+           );
         },
         style: ElevatedButton.styleFrom(
     primary: Color(0xFFF7C910), // Set the background color to F7C910

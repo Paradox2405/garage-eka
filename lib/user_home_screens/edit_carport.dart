@@ -12,6 +12,8 @@ import 'package:timezone/timezone.dart' as tz;
 
 
 class EditCarportScreen extends StatefulWidget {
+  Map<String, dynamic> arguments;
+  EditCarportScreen(this.arguments);
   @override
   _EditCarportScreenState createState() => _EditCarportScreenState();
 }
@@ -129,7 +131,7 @@ Future<void> updateDataInFirestore(String carDocumentID) async {
 
   @override
   Widget build(BuildContext context) {
-        final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+        final arguments = widget.arguments;
 
             final Insurance = arguments['Insurance'] as String;
             final license = arguments['license'] as dynamic;

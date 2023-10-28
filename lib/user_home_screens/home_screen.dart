@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:garage_eka/user_home_screens/profile_screen.dart';
+import 'package:garage_eka/user_home_screens/selectmanufacture.dart';
+import 'package:garage_eka/user_home_screens/viewport.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -97,7 +100,12 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           IconButton(
             icon: Icon(Icons.person),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/profile');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(),
+                ),
+              );
             },
           ),
         ],
@@ -122,11 +130,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 'Manufacture': '${data['manufacturerName']}',
                 'DID': '${data['dID']}',
               };
-
-              Navigator.pushNamed(
+              Navigator.push(
                 context,
-                '/view_port',
-                arguments: arguments,
+                MaterialPageRoute(
+                  builder: (context) => ViewPortScreen(arguments),
+                ),
               );
             },
 
@@ -158,7 +166,12 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, '/manufacture');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ManufactureScreen(),
+            ),
+          );
         },
         backgroundColor: Color(0xFFF7C910),
         child: Icon(Icons.add),

@@ -54,47 +54,88 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-        backgroundColor: Colors.amber, // Set the app theme color
-      ),
+      backgroundColor:Color(0xFFF7C910),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.10,
+          top: MediaQuery.of(context).size.height * 0.10,
+          right: MediaQuery.of(context).size.width * 0.10,
+        ),
+
         child: Column(
           children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.070), // Add a top margin of 10% of the screen height
+            Text(
+              'Log In', // Add your heading text here
+              style: TextStyle(
+                fontSize: 30, // Adjust the font size as needed
+                fontWeight: FontWeight.bold, // You can change the fontWeight
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.080), // Add a top margin of 10% of the screen height
             TextField(
               controller: emailController,
               decoration: InputDecoration(
-                labelText: 'Email',
+                labelText: 'Enter Your Email',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFE3BA12)), // Border color when focused
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFE3BA12)), // Border color when not focused
+                ),
+                fillColor: Color(0xFFE3BA12), // Background color
                 filled: true,
-                fillColor: Colors.white,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.030), // Add a top margin of 10% of the screen height
             TextField(
               controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: 'Enter Your Password',
+                fillColor: Color(0xFFE3BA12), // Background color
                 filled: true,
-                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFE3BA12)), // Border color when focused
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFE3BA12)), // Border color when not focused
+                ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () => _signIn(context),
-              child: Text('Sign In'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.amber, // Set the button color
-              ),
-            ),
-            SizedBox(height: 10),
-            TextButton(
-              onPressed: () => _navigateToRegister(context),
+              onPressed: () => _signIn(context), // Use a lambda function to call _signIn
               child: Text(
-                'Create an Account',
-                style: TextStyle(color: Colors.amber),
+                'Sign In',
+                style: TextStyle(
+                  fontSize: 18.0, // Adjust the font size to your preference
+                ),
               ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white, // Background color
+                onPrimary: Colors.black, // Text color
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.10,
+                  top: MediaQuery.of(context).size.height * 0.018,
+                  right: MediaQuery.of(context).size.width * 0.10,
+                  bottom: MediaQuery.of(context).size.height * 0.018,
+                ),
+                elevation: 0.0,
+              ),
+
+            ),
+            SizedBox(height: 10), // Add some space
+            TextButton(
+              onPressed: () => _navigateToRegister(context), // Call the navigation function
+              child: Text(
+                'Register Now',
+                style: TextStyle(
+                  color: Colors.white, // Set the text color to blue
+                  fontSize: 18.0, // Set the font size to 16.0 (adjust as needed)
+                ),
+              ),
+
             ),
           ],
         ),

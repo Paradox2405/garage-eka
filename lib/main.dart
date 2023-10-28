@@ -61,14 +61,6 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegistrationScreen(),
         '/home': (context) => MainScreen(),
         '/admin': (context) => AdminNav(),
-        '/profile': (context) => ProfileScreen(),
-        '/edit_profile': (context) => EditProfileScreen(),
-        '/manufacture': (context) => ManufactureScreen(),
-        '/model': (context) => ModelScreen(),
-        '/reminder': (context) => ReminderScreen(),
-        '/view_port': (context) => ViewPortScreen(),
-        '/edit_port': (context) => EditCarportScreen(),
-        '/appointments': (context) => Add(),
       },
     );
   }
